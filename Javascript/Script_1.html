@@ -1,0 +1,28 @@
+<!-- Only to be used in Backend protected server environment -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+processForm();
+function processForm( e ){
+            $.ajax({
+				dataType: 'jsonp',
+                crossDomain: true,
+                                url: 'http://smsc.biz/httpapi/send?username=USERNAME&password=PASSWORD&sender_id=SENDERID&route=T&phonenumber=PHONENUMBER&message=MSG_CONTENET',
+                                method: "POST",
+                                headers: {
+                                        "cache-control": "no-cache",
+                                        "Access-Control-Allow-Origin": true
+                                },
+                success: function( data, textStatus, jQxhr ){
+                                        alert( 'Success!' );
+                    $('#response pre').html( data );
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                    alert( jqXhr.statusText); // Load for proper request or ERROR for invalid request
+                }
+            });
+            //e.preventDefault();
+        }
+</script>		

@@ -1,0 +1,33 @@
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<script>
+processForm();
+function processForm( e ){
+            $.ajax({
+			crossDomain: true,
+			url: 'smsc.php?message=MSG_CONTENT&mob_number=PHONENUMBER',
+			method: "POST",
+			headers: {
+					"cache-control": "no-cache",
+					"Access-Control-Allow-Origin": true
+			},
+			success: function( data, textStatus, jQxhr ){
+			if(data.lastIndexOf("-", 0) === 0){
+				//console.log( 'Failed! ' + "Error Code is "+data);
+				alert( 'Failed! ' + "Error Code is "+data);
+			} else {
+				//console.log( 'Suceess! ' + "Message id is "+data);
+				alert( 'Suceess! ' + "Message id is "+data);
+			}
+				//$('#response pre').html( data );
+			},
+			error: function( jqXhr, textStatus, errorThrown ){
+				alert( jqXhr.statusText); // Load for proper request or ERROR for invalid request
+			}
+		});
+		//e.preventDefault();
+	}
+
+</script>		
